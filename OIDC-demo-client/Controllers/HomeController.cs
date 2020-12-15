@@ -42,7 +42,7 @@ namespace OIDC_demo_client.Controllers
         public async Task<IActionResult> Privacy()
         {
             var imageName = await client.GetImageName();
-            return View(imageName);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

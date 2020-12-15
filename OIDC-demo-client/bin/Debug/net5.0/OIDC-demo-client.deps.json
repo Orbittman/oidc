@@ -25,7 +25,7 @@
     ".NETCoreApp,Version=v5.0": {
       "OIDC-demo-client/1.0.0": {
         "dependencies": {
-          "IdentityServer4": "4.0.0",
+          "IdentityServer4": "4.1.1",
           "Microsoft.AspNetCore.Authentication.OpenIdConnect": "5.0.1",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.10.9",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
@@ -319,47 +319,47 @@
           "OIDC-demo-client.dll": {}
         }
       },
-      "IdentityModel/4.3.0": {
+      "IdentityModel/4.4.0": {
         "dependencies": {
           "Newtonsoft.Json": "12.0.2",
           "System.Text.Encodings.Web": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/IdentityModel.dll": {
-            "assemblyVersion": "4.3.0.0",
-            "fileVersion": "4.3.0.0"
+            "assemblyVersion": "4.4.0.0",
+            "fileVersion": "4.4.0.0"
           }
         },
         "compile": {
           "lib/netstandard2.0/IdentityModel.dll": {}
         }
       },
-      "IdentityServer4/4.0.0": {
+      "IdentityServer4/4.1.1": {
         "dependencies": {
-          "IdentityModel": "4.3.0",
-          "IdentityServer4.Storage": "4.0.0",
+          "IdentityModel": "4.4.0",
+          "IdentityServer4.Storage": "4.1.1",
           "Microsoft.AspNetCore.Authentication.OpenIdConnect": "5.0.1",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.7.1",
           "Newtonsoft.Json": "12.0.2"
         },
         "runtime": {
           "lib/netcoreapp3.1/IdentityServer4.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.0.0.0"
+            "assemblyVersion": "4.1.1.0",
+            "fileVersion": "4.1.1.0"
           }
         },
         "compile": {
           "lib/netcoreapp3.1/IdentityServer4.dll": {}
         }
       },
-      "IdentityServer4.Storage/4.0.0": {
+      "IdentityServer4.Storage/4.1.1": {
         "dependencies": {
-          "IdentityModel": "4.3.0"
+          "IdentityModel": "4.4.0"
         },
         "runtime": {
           "lib/netstandard2.0/IdentityServer4.Storage.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.0.0.0"
+            "assemblyVersion": "4.1.1.0",
+            "fileVersion": "4.1.1.0"
           }
         },
         "compile": {
@@ -2187,26 +2187,26 @@
       "serviceable": false,
       "sha512": ""
     },
-    "IdentityModel/4.3.0": {
+    "IdentityModel/4.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lxVs5yhCjNdJBYyjcDU0XbllQfDv103F4cdfUlyJynKIcdB4Oz4/KGhpqrDI7t6VXNgfPOYfMOA55WM6lpf92Q==",
-      "path": "identitymodel/4.3.0",
-      "hashPath": "identitymodel.4.3.0.nupkg.sha512"
+      "sha512": "sha512-b18wrIx5wnZlMxAX7oVsE+nDtAJ4hajYlH0xPlaRvo4r/fz08K6pPeZvbiqS9nfNbzfIgLFmNX+FL9qR9ZR5PA==",
+      "path": "identitymodel/4.4.0",
+      "hashPath": "identitymodel.4.4.0.nupkg.sha512"
     },
-    "IdentityServer4/4.0.0": {
+    "IdentityServer4/4.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-jzXbhomPUG+k/XDKjVHJvL/7X0af+jlyCYmaPu4HGe8XSreL+cKBNat92qxrNtoJASA+69+QgL14Fm4cNcRjzA==",
-      "path": "identityserver4/4.0.0",
-      "hashPath": "identityserver4.4.0.0.nupkg.sha512"
+      "sha512": "sha512-PA7IYDMoUQQY7czXa8lmIorvMvLkbjUaWCpB9+guG6N4EvpyHWwsccDXrc/rHIKDdtXsqSgo5jIbsu3y7qOqww==",
+      "path": "identityserver4/4.1.1",
+      "hashPath": "identityserver4.4.1.1.nupkg.sha512"
     },
-    "IdentityServer4.Storage/4.0.0": {
+    "IdentityServer4.Storage/4.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4TH/U5mSp/8UK2unoJYXqOZChHodtIH+nhAeAjX5S08QSbJatzZCYmOkj735SdewweJvyvKffISJYqvFPBgBmA==",
-      "path": "identityserver4.storage/4.0.0",
-      "hashPath": "identityserver4.storage.4.0.0.nupkg.sha512"
+      "sha512": "sha512-RfbD+kx9/Nss5Cbn43PwUt2LU2ELXZVNamnjX4HsOIscBF+5qLHkofuCd0Gj3Qn4wfO6f/vSLYgvofZRHdVWUg==",
+      "path": "identityserver4.storage/4.1.1",
+      "hashPath": "identityserver4.storage.4.1.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.OpenIdConnect/5.0.1": {
       "type": "package",

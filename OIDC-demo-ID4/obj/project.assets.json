@@ -1005,7 +1005,7 @@
       ]
     },
     "Microsoft.DotNet.PlatformAbstractions/2.0.4": {
-      "sha512": "xwIyaAKMgbw4pMQQ7vN3IaDKzlXbbpmELjsXpkHvI7iMCDUdmjyodyKm911vPjM7FKJfnDFlSFeFoV55erXB7Q==",
+      "sha512": "2HjSGp63VCLQaeGadrLYR868g25mJHr+TFF81yWCaClzjUbU2vNDx6km7SUgPnoLVksE/1e7in88eh+oPtc4aQ==",
       "type": "package",
       "path": "microsoft.dotnet.platformabstractions/2.0.4",
       "files": [
@@ -1102,7 +1102,7 @@
       ]
     },
     "Microsoft.Extensions.DependencyModel/2.0.4": {
-      "sha512": "YcEp7Pp6+j8oYwsjxrs/Bp5X81gN8EeFfr2oqxTwoMi9KngojVueLx93Yjhyetp7v3EzTYNxBUBCqlzdMLgCqQ==",
+      "sha512": "jnHAeijsfJFQXdXmnYK/NhQIkgBUeth//RZZkf0ldIKC+jARbf7YxbA9uTrs/EPhuQxHXaDxVuMyscgmL+UqfA==",
       "type": "package",
       "path": "microsoft.extensions.dependencymodel/2.0.4",
       "files": [
@@ -1190,7 +1190,7 @@
       ]
     },
     "Microsoft.Extensions.Options.ConfigurationExtensions/2.0.0": {
-      "sha512": "OJSVA/mzSY3zPLQsvLU/2Ki92AOuLDCyHmkTP5ZX9TRHy7j1h1ISUxU6kDGpdgHxgcoVgqWteN3aimlYjyO3mg==",
+      "sha512": "Y/lGICwO27fCkQRK3tZseVzFjZaxfGmui990E67sB4MuiPzdJHnJDS/BeYWrHShSSBgCl4KyKRx4ux686fftPg==",
       "type": "package",
       "path": "microsoft.extensions.options.configurationextensions/2.0.0",
       "files": [
@@ -3462,24 +3462,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tim.Barton\\.nuget\\packages\\": {},
+    "C:\\Users\\Tim\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tim.Barton\\Projects\\OIDC-demo-ID4\\OIDC-demo-ID4.csproj",
+      "projectUniqueName": "C:\\Users\\Tim\\Documents\\Visual Studio 2019\\Projects\\oidc\\OIDC-demo-ID4\\OIDC-demo-ID4.csproj",
       "projectName": "OIDC-demo-ID4",
-      "projectPath": "C:\\Users\\Tim.Barton\\Projects\\OIDC-demo-ID4\\OIDC-demo-ID4.csproj",
-      "packagesPath": "C:\\Users\\Tim.Barton\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tim.Barton\\Projects\\OIDC-demo-ID4\\obj\\",
+      "projectPath": "C:\\Users\\Tim\\Documents\\Visual Studio 2019\\Projects\\oidc\\OIDC-demo-ID4\\OIDC-demo-ID4.csproj",
+      "packagesPath": "C:\\Users\\Tim\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Tim\\Documents\\Visual Studio 2019\\Projects\\oidc\\OIDC-demo-ID4\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Tim.Barton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Tim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -3531,7 +3534,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

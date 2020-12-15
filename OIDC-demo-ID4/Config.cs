@@ -11,7 +11,7 @@ namespace OIDC_demo_ID4
     public static class Config
     {
         public static IEnumerable<IdentityResource> IdentityResources =>
-            new IdentityResource[]
+            new[]
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
@@ -20,23 +20,27 @@ namespace OIDC_demo_ID4
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
-            new ApiScope[]
+            new[]
             {
-                //new ApiScope("demoapi", "OIDC demo API")
+                new ApiScope(
+                    "demoapi", 
+                    "OIDC demo API",
+                    new List<string> {"role"} )
             };
 
 
         public static IEnumerable<ApiResource> Apis =>
-            new ApiResource[]
+            new[]
             {
-                new ApiResource("demoapi", "OIDC demo API")
+                new ApiResource(
+                    "demoapi", 
+                    "OIDC demo API")
                 {
-                    Scopes = new []{ "demoapi" }
                 }
             };
 
         public static IEnumerable<Client> Clients =>
-            new Client[]
+            new[]
             {
                 new Client
                 {

@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tim.Barton\\Projects\\OIDC-demo\\OIDC-demo.csproj": {}
+    "C:\\Users\\Tim\\Documents\\Visual Studio 2019\\Projects\\oidc\\OIDC-demo\\OIDC-demo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tim.Barton\\Projects\\OIDC-demo\\OIDC-demo.csproj": {
+    "C:\\Users\\Tim\\Documents\\Visual Studio 2019\\Projects\\oidc\\OIDC-demo\\OIDC-demo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tim.Barton\\Projects\\OIDC-demo\\OIDC-demo.csproj",
+        "projectUniqueName": "C:\\Users\\Tim\\Documents\\Visual Studio 2019\\Projects\\oidc\\OIDC-demo\\OIDC-demo.csproj",
         "projectName": "OIDC-demo-API",
-        "projectPath": "C:\\Users\\Tim.Barton\\Projects\\OIDC-demo\\OIDC-demo.csproj",
-        "packagesPath": "C:\\Users\\Tim.Barton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tim.Barton\\Projects\\OIDC-demo\\obj\\",
+        "projectPath": "C:\\Users\\Tim\\Documents\\Visual Studio 2019\\Projects\\oidc\\OIDC-demo\\OIDC-demo.csproj",
+        "packagesPath": "C:\\Users\\Tim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tim\\Documents\\Visual Studio 2019\\Projects\\oidc\\OIDC-demo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tim.Barton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Tim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -74,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
