@@ -1,5 +1,6 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -58,17 +59,21 @@ namespace OIDC_demo_client
                     options.Scope.Add("profile");
                     options.Scope.Add("address");
                     options.Scope.Add("roles");
+                    options.Scope.Add("age");
+                    options.Scope.Add("subscription");
                     options.Scope.Add("demoapi");
 
                     // options.ClaimActions.Remove("nbf"); // include filtered claims
 
-                    options.ClaimActions.DeleteClaim("sid"); // remove included claims
-                    options.ClaimActions.DeleteClaim("idp");
-                    options.ClaimActions.DeleteClaim("s_hash");
-                    options.ClaimActions.DeleteClaim("auth_time");
-                    options.ClaimActions.DeleteClaim("address");
+                    //options.ClaimActions.DeleteClaim("sid"); // remove included claims
+                    //options.ClaimActions.DeleteClaim("idp");
+                    //options.ClaimActions.DeleteClaim("s_hash");
+                    //options.ClaimActions.DeleteClaim("auth_time");
+                    //options.ClaimActions.DeleteClaim("address");
 
                     options.ClaimActions.MapUniqueJsonKey("role", "role");
+                    options.ClaimActions.MapUniqueJsonKey("age", "age", ClaimValueTypes.Integer);
+                    options.ClaimActions.MapUniqueJsonKey("subscription", "subscription");
                     options.SaveTokens = true;
                     options.ClientSecret = "secret";
                     // options.SignedOutCallbackPath = "/";
@@ -79,6 +84,17 @@ namespace OIDC_demo_client
                         RoleClaimType = JwtClaimTypes.Role
                     };
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("CanAccessRestricedItems",
+                    builder =>
+                    {
+                        builder.RequireAuthenticatedUser();
+                        builder.RequireClaim("age", "50");
+                        builder.RequireClaim("subscription", "Full");
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

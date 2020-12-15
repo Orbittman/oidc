@@ -38,7 +38,7 @@ namespace OIDC_demo_client.Controllers
             return View(new HomeViewModel { ImageName = "Nothing" });
         }
 
-        [Authorize(Roles = "Old")]
+        [Authorize("CanAccessRestricedItems")]
         public async Task<IActionResult> Privacy()
         {
             var imageName = await client.GetImageName();

@@ -1,4 +1,6 @@
 ﻿@model HomeViewModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorisationService
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -18,6 +20,11 @@
     @if (User.IsInRole("Young"))
     {
         <span>Is Young</span>
+    }
+
+    @if ((await AuthorisationService.AuthorizeAsync(User, "CanAccessRestricedItems")).Succeeded)
+    {
+        <span>Can access restricted items</span>
     }
 </p>
     }

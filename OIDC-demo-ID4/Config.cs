@@ -16,7 +16,9 @@ namespace OIDC_demo_ID4
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Address(),
-                new IdentityResource("roles", "Your role(s)", new List<string>{"role"})
+                new IdentityResource("roles", "Your role(s)", new List<string>{"role"}),
+                new IdentityResource("age", "The users age", new List<string>{"age"}),
+                new IdentityResource("subscription", "The users subscription", new List<string>{"subscription"})
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -34,7 +36,8 @@ namespace OIDC_demo_ID4
             {
                 new ApiResource(
                     "demoapi", 
-                    "OIDC demo API")
+                    "OIDC demo API",
+                    new List<string> {"age", "subscription"})
                 {
                 }
             };
@@ -45,7 +48,7 @@ namespace OIDC_demo_ID4
                 new Client
                 {
                     RequirePkce = true,
-                    RequireConsent = true,
+                    RequireConsent = false,
                     ClientName = "OIDC demo client",
                     ClientId="oidc-demo-client",
                     AllowedGrantTypes=GrantTypes.Code,
@@ -57,6 +60,8 @@ namespace OIDC_demo_ID4
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Address,
                         "roles",
+                        "age",
+                        "subscription",
                         "demoapi"
                     },
                     ClientSecrets =

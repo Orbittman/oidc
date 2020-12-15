@@ -11,7 +11,7 @@ namespace OIDC_demo.Controllers
     public class DataController : Controller
     {
         [HttpGet]
-        [Authorize]
+        [Authorize("IsOldEnough")]
         public async Task<IActionResult> GetImages()
         {
             var userIdentity = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
