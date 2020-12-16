@@ -14,6 +14,8 @@ using IdentityServer4.EntityFramework.DbContexts;
 
 namespace OIDC_demo_ID4
 {
+    using Marvin.IDP.DbContexts;
+
     public class Startup
     {
         public IWebHostEnvironment Environment { get; }
@@ -27,8 +29,10 @@ namespace OIDC_demo_ID4
         {
             var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=OIDCDemo;Integrated Security=SSPI;MultipleActiveResultSets=True;Connect Timeout=30;";
 
-              // uncomment, if you want to add an MVC-based UI
-              services.AddControllersWithViews();
+            // uncomment, if you want to add an MVC-based UI
+            services.AddControllersWithViews();
+
+            services.AddDbContext<IdentityDbContext>(options => { options.UseSqlServer(connectionString); });
 
             var builder = services.AddIdentityServer(options =>
             {
@@ -87,50 +91,51 @@ namespace OIDC_demo_ID4
 
         private void InitializeDatabase(IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices
-                .GetService<IServiceScopeFactory>().CreateScope())
+            using var serviceScope = app.ApplicationServices
+                .GetService<IServiceScopeFactory>().CreateScope();
+            serviceScope.ServiceProvider
+                .GetRequiredService<IdentityDbContext>().Database.Migrate();
+
+            serviceScope.ServiceProvider
+                .GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+            var context = serviceScope.ServiceProvider
+                .GetRequiredService<ConfigurationDbContext>();
+            context.Database.Migrate();
+            if (!context.Clients.Any())
             {
-                serviceScope.ServiceProvider
-                    .GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-
-                var context = serviceScope.ServiceProvider
-                    .GetRequiredService<ConfigurationDbContext>();
-                context.Database.Migrate();
-                if (!context.Clients.Any())
+                foreach (var client in Config.Clients)
                 {
-                    foreach (var client in Config.Clients)
-                    {
-                        context.Clients.Add(client.ToEntity());
-                    }
-                    context.SaveChanges();
+                    context.Clients.Add(client.ToEntity());
                 }
+                context.SaveChanges();
+            }
 
-                if (!context.IdentityResources.Any())
+            if (!context.IdentityResources.Any())
+            {
+                foreach (var resource in Config.IdentityResources)
                 {
-                    foreach (var resource in Config.IdentityResources)
-                    {
-                        context.IdentityResources.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
+                    context.IdentityResources.Add(resource.ToEntity());
                 }
+                context.SaveChanges();
+            }
 
-                if (!context.ApiResources.Any())
+            if (!context.ApiResources.Any())
+            {
+                foreach (var resource in Config.Apis)
                 {
-                    foreach (var resource in Config.Apis)
-                    {
-                        context.ApiResources.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
+                    context.ApiResources.Add(resource.ToEntity());
                 }
+                context.SaveChanges();
+            }
 
-                if (!context.ApiScopes.Any())
+            if (!context.ApiScopes.Any())
+            {
+                foreach (var resource in Config.ApiScopes)
                 {
-                    foreach (var resource in Config.ApiScopes)
-                    {
-                        context.ApiScopes.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
+                    context.ApiScopes.Add(resource.ToEntity());
                 }
+                context.SaveChanges();
             }
         }
     }

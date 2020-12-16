@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using OIDC_demo_client.Clients;
 using OIDC_demo_client.Models;
@@ -17,16 +15,13 @@ namespace OIDC_demo_client.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ApiClient client;
         private readonly IDPClient idpClient;
 
         public HomeController(
-            ILogger<HomeController> logger,
             ApiClient client,
             IDPClient idpClient)
         {
-            _logger = logger;
             this.client = client;
             this.idpClient = idpClient;
         }
@@ -46,7 +41,7 @@ namespace OIDC_demo_client.Controllers
         // [Authorize("CanAccessRestricedItems")]
         public async Task<IActionResult> Privacy()
         {
-            var imageName = await client.GetImageName();
+            await client.GetImageName();
             return View();
         }
 

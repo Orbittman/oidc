@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace OIDC_demo.Controllers
 {
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+
     [ApiController]
     [Route("[controller]")]
     [ApiConventionType(typeof(DefaultApiConventions))]
@@ -15,12 +18,12 @@ namespace OIDC_demo.Controllers
         public async Task<IActionResult> GetImages()
         {
             var userIdentity = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-            return Content(await GetIdentityInformation(userIdentity));
+            return Content(await GetIdentityInformation());
         }
 
-        public async Task<string> GetIdentityInformation(string userIdentity)
+        public async Task<string> GetIdentityInformation()
         {
-            var identityToken = userIdentity; // await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+            var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
 
             return $"User: {identityToken}";
         }
