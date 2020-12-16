@@ -23,5 +23,17 @@ namespace OIDC_demo_client.Clients
         {
             return client.RequestRefreshTokenAsync(new RefreshTokenRequest { Address = tokenEndpoint, ClientId = clientId, ClientSecret = secret, RefreshToken = refreshToken });
         }
+
+        internal async Task<TokenRevocationResponse> RevokeTokenAsync(string revocationEndpoint, string clientId, string clientSecret, string accessToken)
+        {
+            return await client.RevokeTokenAsync(
+                new TokenRevocationRequest
+                {
+                    Address = revocationEndpoint,
+                    ClientId = clientId,
+                    ClientSecret = clientSecret,
+                    Token = accessToken
+                });
+        }
     }
 }

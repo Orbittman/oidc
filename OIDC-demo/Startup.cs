@@ -1,4 +1,5 @@
 using System;
+using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -19,7 +20,7 @@ namespace OIDC_demo
                 {
                     options.Authority = "https://localhost:44318";
                     options.ApiName = "demoapi";
-                    options.ApiSecret = "secret";
+                    options.ApiSecret = "secret"; ;
                     // options.EnableCaching = true;
                     // options.CacheDuration = TimeSpan.FromMinutes(5);
                 });

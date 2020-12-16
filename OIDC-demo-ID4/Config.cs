@@ -45,7 +45,7 @@ namespace OIDC_demo_ID4
                     "OIDC demo API")
                 {
                     Scopes = new List<string>{"demoapi"},
-                    ApiSecrets = new List<Secret>{ new Secret("secret")}
+                    ApiSecrets = new List<Secret>{ new Secret("secret".Sha256())}
                 }
             };        
 
@@ -54,6 +54,7 @@ namespace OIDC_demo_ID4
             {
                 new Client
                 {
+                    AccessTokenType = AccessTokenType.Reference,
                     IdentityTokenLifetime  = 60 * 5, // default
                     AuthorizationCodeLifetime = 60 * 5, // default
                     AccessTokenLifetime = 60 * 2,
