@@ -5,8 +5,12 @@
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
+using IdentityServer4.EntityFramework.Mappers;
+using IdentityServer4.EntityFramework.DbContexts;
 
 namespace OIDC_demo_ID4
 {
@@ -21,22 +25,41 @@ namespace OIDC_demo_ID4
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // uncomment, if you want to add an MVC-based UI
-            services.AddControllersWithViews();
+            var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=OIDCDemo;Integrated Security=SSPI;MultipleActiveResultSets=True;Connect Timeout=30;";
+
+              // uncomment, if you want to add an MVC-based UI
+              services.AddControllersWithViews();
 
             var builder = services.AddIdentityServer(options =>
             {
                 // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
                 options.EmitStaticAudienceClaim = true;
             })
-                .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddInMemoryApiResources(Config.Apis)
-                .AddInMemoryClients(Config.Clients)
+                //.AddInMemoryIdentityResources(Config.IdentityResources)
+                //.AddInMemoryApiScopes(Config.ApiScopes)
+                //.AddInMemoryApiResources(Config.Apis)
+                // .AddInMemoryClients(Config.Clients)
                 .AddTestUsers(TestUsers.Users);
 
-            // not recommended for production - you need to store your key material somewhere secure
+            var assemblyName = GetType().Assembly.GetName().Name;
             builder.AddDeveloperSigningCredential();
+            builder.AddConfigurationStore(options =>
+            {
+                options.DefaultSchema = "OIDCDemoIdentity";
+                options.ConfigureDbContext = builder =>
+                {
+                    builder.UseSqlServer(connectionString, options => options.MigrationsAssembly(assemblyName));
+                };
+            });
+
+            builder.AddOperationalStore(options =>
+            {
+                options.DefaultSchema = "OIDCDemoIdentity";
+                options.ConfigureDbContext = builder =>
+                   {
+                       builder.UseSqlServer(connectionString, options => options.MigrationsAssembly(assemblyName));
+                   };
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -45,6 +68,8 @@ namespace OIDC_demo_ID4
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            InitializeDatabase(app);
 
             // uncomment if you want to add MVC
             app.UseStaticFiles();
@@ -58,6 +83,55 @@ namespace OIDC_demo_ID4
             {
                 endpoints.MapDefaultControllerRoute();
             });
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider
+                    .GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+                var context = serviceScope.ServiceProvider
+                    .GetRequiredService<ConfigurationDbContext>();
+                context.Database.Migrate();
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in Config.Clients)
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var resource in Config.IdentityResources)
+                    {
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in Config.Apis)
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiScopes.Any())
+                {
+                    foreach (var resource in Config.ApiScopes)
+                    {
+                        context.ApiScopes.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }
