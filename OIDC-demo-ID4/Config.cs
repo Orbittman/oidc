@@ -4,6 +4,7 @@
 
 using IdentityServer4;
 using IdentityServer4.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OIDC_demo_ID4
@@ -17,8 +18,14 @@ namespace OIDC_demo_ID4
                 new IdentityResources.Profile(),
                 new IdentityResources.Address(),
                 new IdentityResource("roles", "Your role(s)", new List<string>{"role"}),
-                new IdentityResource("age", "The users age", new List<string>{"age"}),
-                new IdentityResource("subscription", "The users subscription", new List<string>{"subscription"})
+                new IdentityResource(
+                    "height",
+                    "The users height",
+                    new List<string>{"height"}),
+                new IdentityResource(
+                    "subscription",
+                    "The users subscription",
+                    new List<string>{"subscription"})
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -27,26 +34,34 @@ namespace OIDC_demo_ID4
                 new ApiScope(
                     "demoapi", 
                     "OIDC demo API",
-                    new List<string> {"role"} )
+                    new List<string> {"role", "height", "subscription"} )
             };
-
 
         public static IEnumerable<ApiResource> Apis =>
             new[]
             {
                 new ApiResource(
-                    "demoapi", 
-                    "OIDC demo API",
-                    new List<string> {"age", "subscription"})
+                    "demoapi",
+                    "OIDC demo API")
                 {
+                    Scopes = new List<string>{"demoapi"},
+                    ApiSecrets = new List<Secret>{ new Secret("secret")}
                 }
-            };
+            };        
 
         public static IEnumerable<Client> Clients =>
             new[]
             {
                 new Client
                 {
+                    IdentityTokenLifetime  = 60 * 5, // default
+                    AuthorizationCodeLifetime = 60 * 5, // default
+                    AccessTokenLifetime = 60 * 2,
+                    AllowOfflineAccess = true, // Refresh tokens allowed
+                    RefreshTokenExpiration = TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime = TimeSpan.FromDays(1).Seconds,
+                    UpdateAccessTokenClaimsOnRefresh = true,
+                    // SlidingRefreshTokenLifetime = TimeSpan.FromDays(1).Seconds,
                     RequirePkce = true,
                     RequireConsent = false,
                     ClientName = "OIDC demo client",
@@ -60,9 +75,9 @@ namespace OIDC_demo_ID4
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Address,
                         "roles",
-                        "age",
-                        "subscription",
-                        "demoapi"
+                        "demoapi",
+                        "height",
+                        "subscription"
                     },
                     ClientSecrets =
                     {

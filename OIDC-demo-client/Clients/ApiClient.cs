@@ -1,25 +1,27 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
+using IdentityModel.Client;
 
 namespace OIDC_demo_client.Clients
 {
-    public class ApiClient
+    public class IDPClient
     {
         private readonly HttpClient client;
 
-        public ApiClient(HttpClient client, BearerTokenHandler tokenHandler)
+        public IDPClient(HttpClient client)
         {
             this.client = client;
         }
 
-        public async Task<string> GetImageName()
+        public async Task<DiscoveryDocumentResponse> GetDiscoveryDocumentAsync()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "data");
-            var response = await client.SendAsync(request);
+            return await client.GetDiscoveryDocumentAsync();
+        }
 
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadAsStringAsync();
+        internal Task<TokenResponse> RequestRefreshTokenAsync(string tokenEndpoint, string clientId, string secret, string refreshToken)
+        {
+            return client.RequestRefreshTokenAsync(new RefreshTokenRequest { Address = tokenEndpoint, ClientId = clientId, ClientSecret = secret, RefreshToken = refreshToken });
         }
     }
 }

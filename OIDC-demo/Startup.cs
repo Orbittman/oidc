@@ -19,8 +19,9 @@ namespace OIDC_demo
                 {
                     options.Authority = "https://localhost:44318";
                     options.ApiName = "demoapi";
-                    options.EnableCaching = true;
-                    options.CacheDuration = TimeSpan.FromMinutes(5);
+                    options.ApiSecret = "secret";
+                    // options.EnableCaching = true;
+                    // options.CacheDuration = TimeSpan.FromMinutes(5);
                 });
             services.AddAuthorization(options =>
             {

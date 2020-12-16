@@ -19,8 +19,8 @@ namespace OIDC_demo_API.Authorisation
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, IsOldEnough requirement)
         {
-            _ = int.TryParse(context.User.Claims.FirstOrDefault(x => x.Type == "age")?.Value, out var age);
-            if(age >= requirement.MinAge)
+            _ = int.TryParse(context.User.Claims.FirstOrDefault(x => x.Type == "height")?.Value, out var height);
+            if(height >= requirement.MinAge)
             {
                 context.Succeed(requirement);
             }
